@@ -4,44 +4,32 @@ namespace List_calsswork
 {
     class Program
     {
-        static List<int> ConverterToPositiveNumber(List<int> array)
+        static List<int> SelectionPositiveNumber(List<int> array)
         {
             List<int> resArr = array.FindAll(i => i >= 0);
             return resArr;
-            
         }
 
         static List<int> NumberInsertionAfterPositiveNumbers(List<int> array, int number)
         {
             List<int> resArr = new List<int>();
 
-            resArr.AddRange(array);
-            
             for (int index = 0; index < array.Count; index++)
             {
-                int okNumIndex = array.FindIndex(i => i > 0);
-                resArr.Insert(okNumIndex + 1, number);
-                
-
+                if (array[index] > 0)
+                {
+                    resArr.Add(array[index]);
+                    resArr.Add(number);
+                }
+                else
+                    resArr.Add(array[index]);
             }
-
-            return array;
-
+            return resArr;
         }
 
-        static List<int> findElement(List<int> array, int number) 
+        static List<int> RemoveInappriateNumbers(List<int> array) 
         {
-            List<int> resultArr = new List<int>();
-            if (array == null || array.Count < 2)
-                return array;
-
-            for (int index = 0; index < array.Count; index++)
-            {
-                if (array[index] == array.Find(i => i == number))
-                {
-                    array.Remove(array[index]);
-                }
-            }
+            array.RemoveAll(i => i % 2 < 0 || i == 0 || i == 1);
             return array;
         }
 
@@ -64,13 +52,13 @@ namespace List_calsswork
         }
         static void Main()
         {
-            List<int> set = new List<int>() { 1, -3, 0, -10, 4, -32 };
-            foreach (var item in findElement(set, 1))
+            List<int> set = new List<int>() { 1, -3, 0, -10, 4, -32, 5, 20 };
+            foreach (var item in RemoveInappriateNumbers(set))
                 Console.Write(item + " ");
 
             List<int> set2 = new List<int>() { 1, -3, 0, -10, 4, -32 };
             Console.WriteLine();
-            foreach (var item in ConverterToPositiveNumber(set2))
+            foreach (var item in SelectionPositiveNumber(set2))
                 Console.Write(item + " ");
 
             List<int> set3 = new List<int>() { 1, -3, 0, -10, 4, -32 };
